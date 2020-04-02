@@ -13,11 +13,11 @@ int main()
 
     int c, d, k;
     int sum = 0;
-    int first[4][2] = {{1, 2},
+    int m1[4][2] = {{1, 2},
                     {2, 3},
                     {3, 4},
                     {4, 5}};
-    int second[2][5] = {{1, 2, 2, 4, 3},
+    int m2[2][5] = {{1, 2, 2, 4, 3},
                       {5, 1, 2, 3, 5}};
 
 
@@ -25,7 +25,7 @@ int main()
     for (c = 0; c < 4; c++) {
       for (d = 0; d < 5; d++) {
         for (k = 0; k < 2; k++) {
-          sum = sum + first[c][k]*second[k][d];
+          sum = sum + m1[c][k]*m2[k][d];
         }
  
         multiply[c][d] = sum;
