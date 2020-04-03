@@ -1,19 +1,14 @@
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
 #include <pthread.h>
-#include <fcntl.h>
 #include <syslog.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <dirent.h>
-#include <limits.h>
 
-#define maks 1000
-int a = 1;
 char ofile[1000];
 
 void *buatfile (void* arg)
@@ -32,17 +27,7 @@ void *buatfile (void* arg)
 			struct stat st;
 			char eks[100];
 			char lokbar[1000];
-			char *pch;	
 			
-			getcwd(lokbar,900);
-			strcat(lokbar,"/");
-			pch =strrchr(nfile '.');
-			if(pch==NULL)
-			{
-				FILE *fp1, *fp2;
-				strcat(lokbar,"Unknown");
-				mkdir(lokbar,"/");
-			}
 		}
 	}
 }
@@ -88,30 +73,7 @@ else if (strcmp(argv[1],"-d")==0)
 		}
 		else
 		{
-			int size;
-			strcpy(locpath,argv[2]);
-			strcat(locpath,"/");
 			
-			size=sizeof(tujuan->d_name)+2;
-			char tmp[size];
-			strcpy(tmp,tujuan->d_name);
-			int flag=0;
-			
-			for(i=0;i<strlen(tmp);i++)
-			{
-				if(tmp[i]==32)
-				{
-					flag++;
-				}
-			}
-			if(flag>0)
-			{
-				snprintf(tmp,1024,"%s", tujuan->d_name);
-			}
-			else
-			{
-				snprintf(tmp,1024,"%s",tujuan->d_name);
-			}
 		}
 		strcpy(nfile,sumber);
 		strcat(nfile,tujuan->d_name);
