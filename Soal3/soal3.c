@@ -88,10 +88,30 @@ else if (strcmp(argv[1],"-d")==0)
 		}
 		else
 		{
+			int size;
 			strcpy(locpath,argv[2]);
 			strcat(locpath,"/");
 			
+			size=sizeof(tujuan->d_name)+2;
+			char tmp[size];
+			strcpy(tmp,tujuan->d_name);
+			int flag=0;
 			
+			for(i=0;i<strlen(tmp);i++)
+			{
+				if(tmp[i]==32)
+				{
+					flag++;
+				}
+			}
+			if(flag>0)
+			{
+				snprintf(tmp,1024,"%s", tujuan->d_name);
+			}
+			else
+			{
+				snprintf(tmp,1024,"%s",tujuan->d_name);
+			}
 		}
 		strcpy(nfile,sumber);
 		strcat(nfile,tujuan->d_name);
