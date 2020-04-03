@@ -20,14 +20,9 @@ void *buatfile (void* arg)
 	{
 		if(S_ISDIR(typestat.st_mode) !=0)
 		{
-			a=1;
 		}
 		else if(S_ISREG(typestat.st_mode) != 0)
 		{
-			struct stat st;
-			char eks[100];
-			char lokbar[1000];
-			
 		}
 	}
 }
@@ -46,8 +41,6 @@ if(dir==NULL)
 {
 	return 0;
 }
-
-/////////////////////////////////////////////////////////// declare
 
 if(strcmp(argv[1],"-f")==0)
 {
