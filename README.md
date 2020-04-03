@@ -2,7 +2,15 @@
 #### ADAM ABELARD GARIBALDI 05111840000125
 #### ALBERTO SANJAYA 05111840000150
 ---
+## Soal 3
+>source code
+>**[3.c](https://github.com/Alberto0150/SoalShiftSISOP20_modul3_A09/blob/master/Soal4/3.c)** 
 
+pada soal 3 diminta untuk membuat program yang memindahkan file sesuai ekstensinya kedalam directory dari ekstensinya masing-masing. juga terdapat 3 input yang terdiri dari -f,-d dan * . dimana opsi -f tersebut, user bisa menambahkan argumen file yang bisa dikategorikan sebanyak yang user inginkan, opsi -d ini, user hanya bisa menginput 1 directory saja,dan opsi * mengkategori seluruh file yang ada di working directory ketika menjalankan program C tersebut.
+
+kendala yang dialami: belum menemukan fungsi dari beberapa opsi yang ada.
+
+---
 ## Soal 4
 >source code
 >**[4a.c](https://github.com/Alberto0150/SoalShiftSISOP20_modul3_A09/blob/master/Soal4/4a.c)** ,
