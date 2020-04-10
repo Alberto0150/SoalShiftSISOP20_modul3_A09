@@ -33,12 +33,12 @@ void *buatfile (void* arg)
 			struct stat st;
 			char eks[1000];
 			char lokbar[1000];
-			char *pch;	
+			char *pch;
 			int index=0,i;
-			
+
 			getcwd(lokbar,1000);
 			strcat(lokbar,"/");
-			pch =strrchr(nfile '.');
+			pch =strrchr(nfile,'.');
 			if(pch==NULL)
 			{
 				FILE *fp1, *fp2;
@@ -46,18 +46,18 @@ void *buatfile (void* arg)
 
 				mkdir(lokbar,0777);
 				strcat(lokbar,"/");
-				
-				
+
+
 				pch=strrchr(nfile,'/');
 				char temp[1000];
 				strcpy(temp,pch);
-				memmoce(&temp[index],&temp[index+1],strlen(temp)-index);
+				memmove(&temp[index],&temp[index+1],strlen(temp)-index);
 				strcat(lokbar,temp);
-				
-				
+
+
 				fp1=fopen(nfile,"rb");
 				fp2=fopen(lokbar,"wb");
-				
+
 				if(!fp1)
 				{
 					fclose(fp2);
@@ -73,7 +73,7 @@ void *buatfile (void* arg)
 				fclose(fp1);
 				fclose(fp2);
 				a=1;
-				
+
 			}
 			else
 			{
@@ -101,7 +101,7 @@ void *buatfile (void* arg)
 
 					strcat(lokbar,temp);
 					fp1=fopen(nfile,"rb");
-					fp2=fopen(lokbar,"wb"):
+					fp2=fopen(lokbar,"wb");
 					if(!fp1)
 					{
 						fclose(fp2);
@@ -124,7 +124,7 @@ void *buatfile (void* arg)
 						closedir(dir);
 						FILE *fp1, *fp2;
 						char namafile[1000];
-						pch=strrchr(nfile,'/');
+						pch = strrchr(nfile,'/');
 						strcpy(namafile,pch);
 						memmove(&namafile[index],&namafile[index+1],strlen(namafile)-index);
 						strcat(lokbar,"/");
@@ -153,11 +153,13 @@ void *buatfile (void* arg)
 						mkdir(lokbar,0777);
 						FILE *fp1, *fp2;
 						char namafile[1000];
-						pch=strrchr(namafile,pch);
+
+
+						pch = strrchr(nfile,'/');
 						memmove(&namafile[index],&namafile[index+1],strlen(namafile)-index);
 						strcat(lokbar,"/");
 						strcat(lokbar,namafile);
-						
+
 						fp1=fopen(nfile,"rb");
 						fp2=fopen(lokbar,"wb");
 						if(!fp1)
@@ -175,9 +177,10 @@ void *buatfile (void* arg)
 						fclose(fp1);
 						fclose(fp2);
 						a=1;
-					}	
+					}
 				}
 			}
+		}
 		else
 		{
 			a=1;
@@ -189,11 +192,9 @@ void *buatfile (void* arg)
 
 int main(int argc, char *argv[])
 {
-pthread_t thread[];	
+pthread_t thread[maks];
 int count=0;
 int i;
-
-
 
 /////////////////////////////////////////////////////////// declare
 
@@ -201,12 +202,12 @@ if(strcmp(argv[1],"-f")==0) // udh
 {
 	for(i=1;i<argc-1;i++)
 	{
-		strcpy(nfile,argv[i+1]);
-		pthread_create(&thread[count],NULL,&buatfile,NULL)
+		strcpy(ofile,argv[i+1]);
+		pthread_create(&thread[count],NULL,&buatfile,NULL);
 		count++;
 	}
-	
-	
+
+
 }
 else if (strcmp(argv[1],"-d")==0) // udh
 {
@@ -221,8 +222,8 @@ else if (strcmp(argv[1],"-d")==0) // udh
 	{
 		char locpath[100];
 		struct stat typestat;
-		
-		if(strcmp(tujuan->d_name,"."==0||strcm(tujuan->d_name,"..")==0)
+
+		if(strcmp(tujuan->d_name,".")==0||strcmp(tujuan->d_name,"..")==0)
 		{
 			continue;
 		}
@@ -231,12 +232,12 @@ else if (strcmp(argv[1],"-d")==0) // udh
 			int size;
 			strcpy(locpath,argv[2]);
 			strcat(locpath,"/");
-			
+
 			size=sizeof(tujuan->d_name)+2;
 			char tmp[size];
 			strcpy(tmp,tujuan->d_name);
 			int flag=0;
-			
+
 			for(i=0;i<strlen(tmp);i++)
 			{
 				if(tmp[i]==32)
@@ -257,8 +258,8 @@ else if (strcmp(argv[1],"-d")==0) // udh
 			pthread_create(&thread[count],NULL,buatfile,NULL);
 			count++;
 		}
-		
-	}	
+
+	}
 }
 else // untuk terakhir
 {
@@ -277,8 +278,8 @@ else // untuk terakhir
 		{
 			char locpath[1000];
 			struct stat typestat;
-			
-			if(strcmp(tujuan->d_name,"."==0||strcm(tujuan->d_name,"..")==0)
+
+			if(strcmp(tujuan->d_name,".")==0||strcmp(tujuan->d_name,"..")==0)
 			{
 				continue;
 			}
@@ -290,12 +291,12 @@ else // untuk terakhir
 				strcpy(locpath,temp);
 				strcpy(locpath,argv[2]);
 				strcat(locpath,"/");
-				
+
 				size=sizeof(tujuan->d_name)+2;
 				char tmp[size];
 				strcpy(tmp,tujuan->d_name);
 				int flag=0;
-				
+
 				for(i=0;i<strlen(tmp);i++)
 				{
 					if(tmp[i]==32)
@@ -315,23 +316,21 @@ else // untuk terakhir
 				strcpy(ofile,locpath);
 				pthread_create(&thread[count],NULL,buatfile,NULL);
 				count++;
-					
+
 			}
-			
+
 		}
-		
 	}
-	else
-	{
-		a=0;
-		pthread_create(&(thread[0]), NULL, buatfile, (void *)argv[1]);
-		return 0;
-	}
-}
+else
+{
+	a=0;
+	pthread_create(&(thread[0]), NULL, buatfile, (void *)argv[1]);
+	return 0;
 }
 for(i=0;i<count;i++)
 {
 	pthread_join(thread[i],NULL);
 }
 return 0;
+}
 }
