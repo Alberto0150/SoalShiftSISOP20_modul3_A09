@@ -266,9 +266,84 @@ else if (strcmp(argv[1],"-d")==0) // udh
 ```
 - serta bila input merupakan "\*"
 ```
+else // untuk terakhir
+{
+	if(strcmp(argv[1],"*")==0)
+	{
+		char temp[1000];
+		getcwd(temp,sizeof(temp));
 
+		struct dirent *tujuan;
+		DIR *dir = opendir(argv[2]);
+		if(dir==NULL)
+		{
+			return 0;
+		}
+		while((tujuan = readdir(dir))!=NULL)
+		{
+			char locpath[1000];
+			struct stat typestat;
+
+			if(strcmp(tujuan->d_name,".")==0||strcmp(tujuan->d_name,"..")==0)
+			{
+				continue;
+			}
+			else
+			{
+				int size;
+				char temp[1000];
+				getcwd(temp,sizeof(temp));
+				strcpy(locpath,temp);
+				strcpy(locpath,argv[2]);
+				strcat(locpath,"/");
+
+				size=sizeof(tujuan->d_name)+2;
+				char tmp[size];
+				strcpy(tmp,tujuan->d_name);
+				int flag=0;
+
+				for(i=0;i<strlen(tmp);i++)
+				{
+					if(tmp[i]==32)
+					{
+						flag++;
+					}
+				}
+				if(flag>0)
+				{
+					snprintf(tmp,1024,"%s", tujuan->d_name);
+				}
+				else
+				{
+					snprintf(tmp,1024,"%s",tujuan->d_name);
+				}
+				strcat(locpath,tmp);
+				strcpy(ofile,locpath);
+				pthread_create(&thread[count],NULL,buatfile,NULL);
+				count++;
+
+			}
+
+		}
+	}
+
+else
+{
+	a=0;
+	pthread_create(&(thread[0]), NULL, buatfile, (void *)argv[1]);
+	return 0;
+}
+}
 ```
-kendala yang dialami: fungsi sudah dapat di compile namun belum mendapatkan hasil yang sebenarnya
+
+- kemudian setelah thread dibuat, thread dijoinkan dengan fungsi berikut :
+```
+for(i=0;i<count;i++)
+{
+	pthread_join(thread[i],NULL);
+}
+```
+hingga saat ini fungsi sudah dapat di compile namun belum mendapatkan hasil yang sebenarnya karena masih menghasilkan "core dump".
 
 ---
 ## Soal 4
