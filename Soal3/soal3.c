@@ -321,16 +321,18 @@ else // untuk terakhir
 
 		}
 	}
+
 else
 {
 	a=0;
 	pthread_create(&(thread[0]), NULL, buatfile, (void *)argv[1]);
 	return 0;
 }
+}
 for(i=0;i<count;i++)
 {
 	pthread_join(thread[i],NULL);
 }
 return 0;
-}
+
 }
