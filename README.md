@@ -194,7 +194,7 @@ int i;
 
 ```
 
--jika input merupakan "-f"
+- jika input merupakan "-f"
 ```
 if(strcmp(argv[1],"-f")==0) // udh
 {
